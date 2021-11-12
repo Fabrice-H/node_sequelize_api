@@ -69,3 +69,17 @@ exports.getPublishedProduct = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 }
+
+// all product reviews
+exports.getProductReviews = async (req, res) => {
+    try {
+        const data = await Product.findAll({
+            include: [{ model: Review, as: 'review' }],
+            where: { id: 2 }
+        });
+
+        res.status(200).send(data);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
